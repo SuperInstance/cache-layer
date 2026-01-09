@@ -1,0 +1,13 @@
+# Prometheus configuration for cache-layer metrics
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'cache-layer'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'cache-layer'
+          environment: 'development'

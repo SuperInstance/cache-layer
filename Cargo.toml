@@ -1,0 +1,93 @@
+[package]
+name = "cache-layer"
+version = "0.1.0"
+edition = "2021"
+authors = ["Equilibrium Tokens"]
+description = "Multi-tier caching library with memory, Redis, and disk persistence"
+license = "MIT"
+repository = "https://github.com/equilibrium-tokens/cache-layer"
+keywords = ["cache", "redis", "multi-tier", "caching"]
+categories = ["caching", "database"]
+readme = "README.md"
+
+[features]
+default = ["memory", "redis", "disk"]
+memory = []
+redis = ["redis-dep", "bb8"]
+disk = ["zstd"]
+full = ["memory", "redis", "disk"]
+
+[dependencies]
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+async-trait = "0.1"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Error handling
+thiserror = "1.0"
+anyhow = "1.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# Metrics
+prometheus = { version = "0.13", optional = true }
+
+# Redis support
+redis-dep = { package = "redis", version = "0.24", features = ["tokio-comp", "connection-manager"], optional = true }
+bb8 = { version = "0.8", optional = true }
+
+# Compression (for disk cache)
+zstd = { version = "0.13", optional = true }
+
+# Utilities
+dashmap = "5.5"
+parking_lot = "0.12"
+
+[dev-dependencies]
+# Testing
+tokio-test = "0.4"
+criterion = { version = "0.5", features = ["html_reports"] }
+mockall = "0.12"
+
+# Benchmarking
+pprof = { version = "0.13", features = ["flamegraph", "criterion"] }
+
+# Test utilities
+redis-test = "0.4"
+tempfile = "3.8"
+
+[[bench]]
+name = "memory_bench"
+harness = false
+
+[[bench]]
+name = "redis_bench"
+harness = false
+required-features = ["redis"]
+
+[[bench]]
+name = "disk_bench"
+harness = false
+required-features = ["disk"]
+
+[[bench]]
+name = "multi_tier_bench"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.bench]
+inherits = "release"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]

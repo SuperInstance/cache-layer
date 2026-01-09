@@ -1,0 +1,50 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test data
+/tests/test_data/
+benches/*.svg
+
+# Coverage
+tarpaulin-report.html
+cobertura.xml
+coverage/
+
+# Redis
+dump.rdb
+
+# Disk cache
+/var/cache/
+
+# Documentation
+/doc/
+/docs/*.pdf
+
+# Logs
+*.log
+
+# Environment
+.env
+.env.local
+
+# Backup
+*.bak
+*.backup
+
+# Temporary files
+*.tmp
+*.temp
