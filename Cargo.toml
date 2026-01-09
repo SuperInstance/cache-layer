@@ -61,23 +61,24 @@ pprof = { version = "0.13", features = ["flamegraph", "criterion"] }
 redis-test = "0.4"
 tempfile = "3.8"
 
-[[bench]]
-name = "memory_bench"
-harness = false
-
-[[bench]]
-name = "redis_bench"
-harness = false
-required-features = ["redis"]
-
-[[bench]]
-name = "disk_bench"
-harness = false
-required-features = ["disk"]
-
-[[bench]]
-name = "multi_tier_bench"
-harness = false
+# Benchmarks (TODO: Create these files)
+# [[bench]]
+# name = "memory_bench"
+# harness = false
+#
+# [[bench]]
+# name = "redis_bench"
+# harness = false
+# required-features = ["redis"]
+#
+# [[bench]]
+# name = "disk_bench"
+# harness = false
+# required-features = ["disk"]
+#
+# [[bench]]
+# name = "multi_tier_bench"
+# harness = false
 
 [profile.release]
 opt-level = 3
